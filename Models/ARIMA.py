@@ -27,6 +27,7 @@ class arima():
         predicted_trend = self.model.predict(start=prediction_start, end=prediction_end, dynamic=False, typ='levels')
         plt.plot(predicted_trend)
         plt.plot(self.data[self.relevant_column].loc[prediction_start:])
+        plt.title("Predictions for last 5% duration")
         plt.show()
 
     def change_parameter(self, new_parameter_triple):
