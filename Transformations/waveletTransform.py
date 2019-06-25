@@ -7,12 +7,13 @@ class waveletTransformer():
     The default decomposition level is 3
     '''
     data=None
-    relevant_column = ['open'] #single column
+    relevant_column = 'open' #single column
     decomposed_data=None
     level = None
 
     def __init__(self, stock_prices):
         self.data = stock_prices[self.relevant_column]
+        print (self.data)
 
     def transform_plot(self, level=3):
         self.level = level
@@ -21,10 +22,16 @@ class waveletTransformer():
         return self.decomposed_data
 
     def plot(self):
+        plt.figure(figsize=(5,10))
+
+        plt.subplot(len(self.decomposed_data)+1, 1, 1)
+        plt.title("original data and its wavelet decompositions")
+        plt.plot(self.data, c="orange")
+
         for index, de_level in enumerate(self.decomposed_data):
-            plt.subplot(len(self.decomposed_data), 1, index + 1)
+            plt.subplot(len(self.decomposed_data)+1, 1, index + 2)
             plt.plot(de_level)
-        plt.suptitle(str(self.level) + ' levels of decomposition')
+        #plt.suptitle(str(self.level) + ' levels of decomposition')
         plt.show()
 
     def change_parameter(self, new_level):
